@@ -1,0 +1,433 @@
+/* =========================================================
+   Invitación al cine · Toy Story 5
+   Estilos profesionales con tema "cielo de Andy" + cine
+   ========================================================= */
+
+:root {
+  --sky-top: #5ec2f2;
+  --sky-bottom: #bfe9ff;
+  --cloud: #ffffff;
+  --woody-red: #d6322f;
+  --woody-yellow: #ffd23f;
+  --buzz-purple: #7b5cd6;
+  --buzz-green: #3fb950;
+  --ink: #25324b;
+  --curtain: #8e1b1b;
+  --curtain-dark: #5e0f0f;
+  --gold: #f7c948;
+  --radius: 22px;
+  --shadow: 0 18px 40px rgba(20, 40, 80, 0.18);
+  --shadow-strong: 0 26px 60px rgba(20, 40, 80, 0.28);
+  --font-fun: "Fredoka", system-ui, sans-serif;
+  --font-pop: "Luckiest Guy", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-fun);
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* ---------- Cielo con nubes ---------- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  background: var(--cloud);
+  border-radius: 100px;
+  opacity: 0.9;
+  filter: drop-shadow(0 10px 0 rgba(0, 0, 0, 0.03));
+  animation: drift linear infinite;
+}
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: var(--cloud);
+  border-radius: 50%;
+}
+.cloud::before { width: 55%; height: 150%; top: -55%; left: 12%; }
+.cloud::after  { width: 45%; height: 130%; top: -40%; right: 14%; }
+
+.cloud--1 { width: 140px; height: 42px; top: 12%; left: -160px; animation-duration: 38s; }
+.cloud--2 { width: 200px; height: 56px; top: 30%; left: -220px; animation-duration: 55s; animation-delay: -10s; }
+.cloud--3 { width: 110px; height: 34px; top: 55%; left: -140px; animation-duration: 46s; animation-delay: -22s; }
+.cloud--4 { width: 170px; height: 50px; top: 72%; left: -200px; animation-duration: 60s; animation-delay: -5s; }
+.cloud--5 { width: 90px;  height: 30px; top: 85%; left: -120px; animation-duration: 42s; animation-delay: -30s; }
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(100vw + 280px)); }
+}
+
+/* ---------- Cortinas de cine ---------- */
+.curtain {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 16vw;
+  min-width: 70px;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--curtain) 0 18px,
+      var(--curtain-dark) 18px 38px);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.55);
+}
+.curtain--left {
+  left: 0;
+  border-right: 6px solid var(--gold);
+  border-radius: 0 30px 30px 0 / 0 80px 80px 0;
+}
+.curtain--right {
+  right: 0;
+  border-left: 6px solid var(--gold);
+  border-radius: 30px 0 0 30px / 80px 0 0 80px;
+}
+
+/* ---------- Stage / pantallas ---------- */
+.stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 460px;
+}
+
+.screen {
+  display: none;
+  text-align: center;
+  animation: screenIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.screen.is-active { display: block; }
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- Marquesina con bombillos ---------- */
+.marquee {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink);
+  color: var(--woody-yellow);
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+  border: 3px solid var(--gold);
+}
+.marquee__text { font-size: 0.95rem; }
+.marquee__bulbs {
+  width: 46px;
+  height: 12px;
+  border-radius: 8px;
+  background-image: radial-gradient(circle, var(--gold) 38%, transparent 42%);
+  background-size: 14px 14px;
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0.35; } }
+
+/* ---------- Intro ---------- */
+.intro__title {
+  font-family: var(--font-pop);
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  line-height: 1.05;
+  color: #fff;
+  text-shadow: 0 4px 0 var(--woody-red), 0 8px 18px rgba(0, 0, 0, 0.25);
+  margin-bottom: 16px;
+}
+.intro__subtitle {
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  margin-bottom: 30px;
+}
+.intro__hint {
+  margin-top: 14px;
+  color: #ffffffcc;
+  font-size: 0.9rem;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  font-family: var(--font-fun);
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  padding: 16px 30px;
+  border-radius: 999px;
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  box-shadow: var(--shadow);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-strong); }
+.btn:active { transform: translateY(0) scale(0.97); }
+
+.btn--primary { background: linear-gradient(135deg, var(--buzz-purple), #5a3fb0); }
+.btn--yes { background: linear-gradient(135deg, var(--buzz-green), #2e9e43); }
+.btn--no  { background: linear-gradient(135deg, var(--woody-red), #b3211f); }
+
+.pulse { animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* ---------- Ticket ---------- */
+.ticket {
+  background: #fffdf6;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  text-align: left;
+  border: 3px solid #fff;
+  position: relative;
+}
+.ticket__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--woody-red);
+  color: #fff;
+  padding: 16px 20px;
+}
+.ticket__logo {
+  font-family: var(--font-pop);
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  display: block;
+}
+.ticket__sub { font-size: 0.78rem; opacity: 0.9; }
+.ticket__price {
+  font-family: var(--font-pop);
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1;
+  background: var(--woody-yellow);
+  color: var(--ink);
+  padding: 8px 10px;
+  border-radius: 10px;
+  transform: rotate(6deg);
+}
+
+/* Poster */
+.ticket__poster { padding: 18px; }
+.poster {
+  background: linear-gradient(160deg, #1b2540, #2d3e6b 60%, var(--buzz-purple));
+  border-radius: 16px;
+  padding: 26px 18px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+}
+.poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, #ffffff22 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 40%, #ffffff22 0 2px, transparent 3px),
+    radial-gradient(circle at 40% 80%, #ffffff22 0 2px, transparent 3px),
+    radial-gradient(circle at 85% 75%, #ffffff22 0 2px, transparent 3px);
+  pointer-events: none;
+}
+
+/* Variante con el póster oficial como fondo */
+.poster--image {
+  background: #1b2540 url("images/toy-story-5-poster.png") center top / cover no-repeat;
+  aspect-ratio: 2 / 3;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.poster--image::after { display: none; }
+/* Degradado inferior para que la frase se lea sobre el póster */
+.poster--image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0) 28%,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.78) 100%);
+  pointer-events: none;
+}
+
+.poster__badge {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  display: inline-block;
+  background: var(--woody-yellow);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.poster__caption {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.poster__tag {
+  font-style: italic;
+  opacity: 0.95;
+  font-size: 0.95rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+.poster__stars {
+  color: var(--gold);
+  margin-top: 8px;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Detalles */
+.ticket__details {
+  list-style: none;
+  padding: 6px 22px 18px;
+}
+.ticket__details li {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px dashed #d9d2bd;
+  font-size: 0.95rem;
+}
+.ticket__details li:last-child { border-bottom: none; }
+.ticket__details span { color: #7a7567; }
+.ticket__details strong { text-align: right; color: var(--ink); }
+
+/* Perforación */
+.ticket__perforation {
+  position: relative;
+  height: 24px;
+  background:
+    radial-gradient(circle at 10px 12px, var(--sky-bottom) 0 8px, transparent 9px) left / 24px 24px repeat-x;
+  border-top: 2px dashed #cfc7b0;
+  margin: 0 -3px;
+}
+
+.ticket__question {
+  text-align: center;
+  font-family: var(--font-pop);
+  font-size: 1.4rem;
+  color: var(--woody-red);
+  padding: 14px 18px 4px;
+}
+
+.ticket__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  padding: 16px 18px 26px;
+  position: relative;
+  min-height: 90px;
+  align-items: center;
+}
+.btn--no { position: relative; transition: all 0.18s ease; }
+
+/* ---------- Confirmación ---------- */
+.yay__title {
+  font-family: var(--font-pop);
+  font-size: clamp(2rem, 9vw, 3rem);
+  color: #fff;
+  text-shadow: 0 4px 0 var(--buzz-green), 0 8px 18px rgba(0,0,0,0.25);
+  margin-bottom: 14px;
+}
+.yay__text {
+  background: rgba(255,255,255,0.82);
+  display: inline-block;
+  padding: 14px 20px;
+  border-radius: 18px;
+  font-size: 1.05rem;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow);
+}
+
+.countdown {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 22px 18px;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow-strong);
+  border: 3px solid var(--gold);
+}
+.countdown__label {
+  font-size: 0.9rem;
+  color: var(--woody-yellow);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.countdown__box {
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px 4px;
+}
+.countdown__box span {
+  display: block;
+  font-family: var(--font-pop);
+  font-size: 1.7rem;
+  color: var(--woody-yellow);
+}
+.countdown__box small { font-size: 0.72rem; opacity: 0.8; }
+.countdown__note { margin-top: 14px; font-size: 0.9rem; color: var(--buzz-green); }
+
+/* ---------- Confeti ---------- */
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 380px) {
+  .ticket__actions { flex-direction: column; }
+  .marquee__text { font-size: 0.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud, .pulse, .marquee__bulbs { animation: none !important; }
+}

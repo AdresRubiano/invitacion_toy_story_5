@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Una invitación muy especial al cine" />
+  <title>🎬 Una invitación especial para ti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Nubes de fondo estilo Toy Story -->
+  <div class="sky" aria-hidden="true">
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+    <div class="cloud cloud--4"></div>
+    <div class="cloud cloud--5"></div>
+  </div>
+
+  <!-- Cortinas de cine -->
+  <div class="curtain curtain--left" aria-hidden="true"></div>
+  <div class="curtain curtain--right" aria-hidden="true"></div>
+
+  <main class="stage">
+
+    <!-- PANTALLA 1: Bienvenida -->
+    <section class="screen screen--intro is-active" id="intro">
+      <div class="marquee">
+        <span class="marquee__bulbs" aria-hidden="true"></span>
+        <p class="marquee__text">🎬 FUNCIÓN ESPECIAL 🎬</p>
+        <span class="marquee__bulbs" aria-hidden="true"></span>
+      </div>
+
+      <h1 class="intro__title">Tengo algo<br />que preguntarte…</h1>
+      <p class="intro__subtitle">Hay una historia que quiero vivir contigo. 💗</p>
+
+      <button class="btn btn--primary pulse" id="startBtn">
+        Ábreme 🍿
+      </button>
+      <p class="intro__hint">(toca el botón)</p>
+    </section>
+
+    <!-- PANTALLA 2: El ticket / invitación -->
+    <section class="screen screen--ticket" id="ticket">
+      <div class="ticket">
+        <div class="ticket__top">
+          <div class="ticket__brand">
+            <span class="ticket__logo">★ CINE DE LOS DOS ★</span>
+            <span class="ticket__sub">Sala privada · solo nosotros</span>
+          </div>
+          <div class="ticket__price">ADMIT<br />TWO</div>
+        </div>
+
+        <div class="ticket__poster">
+          <div class="poster poster--image">
+            <span class="poster__badge">PRÓXIMAMENTE</span>
+            <div class="poster__caption">
+              <p class="poster__tag">"Hasta el infinito… contigo 💗"</p>
+              <div class="poster__stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="ticket__details">
+          <li><span>🎟️ Para</span><strong id="guestName">Mi persona favorita</strong></li>
+          <li><span>🎥 Película</span><strong>Toy Story 5</strong></li>
+          <li><span>📅 Fecha</span><strong id="dateText">Tú eliges el día</strong></li>
+          <li><span>🍿 Incluye</span><strong>Crispetas, abrazos y mimos</strong></li>
+          <li><span>💺 Asiento</span><strong>Justo a mi lado</strong></li>
+        </ul>
+
+        <div class="ticket__perforation" aria-hidden="true"></div>
+
+        <p class="ticket__question">¿Quieres ir al cine conmigo?</p>
+
+        <div class="ticket__actions">
+          <button class="btn btn--yes" id="yesBtn">¡Sí, claro! 💕</button>
+          <button class="btn btn--no" id="noBtn">No 😅</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3: Confirmación -->
+    <section class="screen screen--yay" id="yay">
+      <h2 class="yay__title">¡Es una cita! 🎉</h2>
+      <p class="yay__text">Ya quiero compartir las crispetas contigo.<br />Va a ser una función inolvidable. 💗</p>
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <p class="countdown__label">Cuenta regresiva para Toy Story 5</p>
+        <div class="countdown__grid">
+          <div class="countdown__box"><span id="cdDays">--</span><small>días</small></div>
+          <div class="countdown__box"><span id="cdHours">--</span><small>horas</small></div>
+          <div class="countdown__box"><span id="cdMin">--</span><small>min</small></div>
+          <div class="countdown__box"><span id="cdSec">--</span><small>seg</small></div>
+        </div>
+        <p class="countdown__note" id="cdNote"></p>
+      </div>
+
+      <button class="btn btn--primary" id="restartBtn">Ver de nuevo 🔁</button>
+    </section>
+
+  </main>
+
+  <!-- Capa de confeti -->
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
